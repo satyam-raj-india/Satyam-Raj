@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Satyam Portfolio</title>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f6fa;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 15px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      padding: 20px;
+      margin-bottom: 25px;
+      border-left: 6px solid transparent;
+    }
+
+    /* Multicolor sections */
+    .about { border-left-color: #4a90e2; }
+    .skills { border-left-color: #27ae60; }
+    .projects { border-left-color: #f39c12; }
+    .donate { border-left-color: #e74c3c; }
+    .crypto { border-left-color: #9b59b6; }
+    .contact { border-left-color: #2c3e50; }
+
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .title i {
+      font-size: 20px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    details {
+      margin-bottom: 12px;
+    }
+
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: #444;
+    }
+
+    code {
+      background: #f4f4f4;
+      padding: 4px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      display: block;
+      margin: 6px 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 6px;
+      background: #4a4fff;
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    .btn:hover {
+      background: #3033cc;
+    }
+
+    .social a {
+      text-decoration: none;
+      margin-right: 15px;
+      font-size: 16px;
+    }
+
+    .crypto-icons i {
+      font-size: 20px;
+      margin: 5px;
+      color: #555;
+    }
+
+    .donate-msg {
+      font-style: italic;
+      margin-bottom: 12px;
+      color: #333;
+    }
+
+    .donate a {
+      text-decoration: none;
+      color: #222; /* normal text color, not blue */
+      font-weight: bold;
+    }
+
+    .donate a:hover {
+      color: #4a4fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- About -->
+    <div class="card about">
+      <div class="title"><i class="fas fa-user"></i> About Me</div>
+      <div class="subtitle">Cyber Security Beginner | Developer | Learner</div>
+      <p>Hello! I’m <b>Satyam Raj</b>. I'm a Cyber Security and Web Development Beginner. I like to create anything related to code and scripts. I'm not a professional or an expert — I'm just a beginner. If you find any mistakes, keep them with you. They aren't mistakes, that's my style ;)</p>
+    </div>
+
+    <!-- Skills -->
+    <div class="card skills">
+      <div class="title"><i class="fas fa-tools"></i> Skills</div>
+      <p>Cyber Security · Penetration Testing · Python · HTML/CSS/JS · Web Development · Photo & Video Editing · App/Game Modding</p>
+    </div>
+
+    <!-- Projects -->
+    <div class="card projects">
+      <div class="title"><i class="fas fa-folder-open"></i> My Projects</div>
+
+      <details>
+        <summary>ROOTX BASE</summary>
+        <code>Cybersecurity portal & advanced tools for everyone.</code>
+        <a href="https://s4tyam-raj.github.io/Rootx" class="btn">Visit</a>
+      </details>
+
+      <details>
+        <summary>Anon Multi Feature App</summary>
+        <code>A web app with over 80 features, automatically updated weekly | Over 500 global users</code>
+        <a href="https://eclectic-brioche-f7d7a7.netlify.app/" class="btn">Visit</a>
+      </details>
+
+      <details>
+        <summary>Anonymous Chatting App</summary>
+        <code>A simple and fully anonymous chatting app made with just JSON and HTML/JS.</code>
+        <a href="https://www.mediafire.com/file/ie44v64wifbzxut/Anonymous_Chatting.apk/file" class="btn">Visit</a>
+      </details>
+
+      <details>
+        <summary>Rootx Bans</summary>
+        <code>Created to make social environments more user-friendly on Instagram and WhatsApp. Using this tool, you can report any user to the authorities for review.</code>
+        <a href="https://www.mediafire.com/file/ax73yb8ji5xto0t/%25E1%258F%2592%25E1%258E%25BE%25E1%258E%25BE%25E1%258F%2586x_b%25E1%258E%25AA%25E1%258F%2581s_9.8%25282%2529.apk/file" class="btn">Visit</a>
+      </details>
+
+      <details>
+        <summary>RootX Base</summary>
+        <code>A secure authenticated portal for users that provides free tools and scripts.</code>
+        <a href="https://www.mediafire.com/file/b44ytmbyyao2v57/RootX_Base_9.8.apk/file" class="btn">Visit</a>
+      </details>
+
+      <!-- New link for all projects -->
+      <a href="projects.html" class="btn">View All Projects</a>
+    </div>
+
+    <!-- Donate -->
+    <div class="card donate">
+      <div class="title"><i class="fas fa-heart"></i> Donate</div>
+      <p class="donate-msg">Your support keeps my projects alive ❤️ Every contribution motivates me to build more!</p>
+      <p>
+        <i class="fas fa-university"></i> 
+        <a href="upi://pay?pa=9679145745@fam&pn=0000&tid=123456&am=100&cu=INR" target="_blank">
+          9679145745@fam 
+        </a>
+      </p>
+      <p>
+        <i class="fab fa-paypal"></i> 
+        <a href="https://www.paypal.me/SatyamSingh420" target="_blank">
+          paypal.me/SatyamSingh420
+        </a>
+      </p>
+    </div>
+
+    <!-- Crypto -->
+    <div class="card crypto">
+      <div class="title"><i class="fab fa-bitcoin"></i> We Accept Cryptos</div>
+      <div class="crypto-icons">
+        <i class="fab fa-bitcoin"></i>
+        <i class="fab fa-ethereum"></i>
+        <i class="fab fa-monero"></i>
+        <i class="fab fa-litecoin"></i>
+        <i class="fab fa-dash"></i>
+        <i class="fab fa-dyalog"></i>
+        <i class="fab fa-docker"></i>
+        <i class="fab fa-viacoin"></i>
+      </div>
+      <a href="crypto.html" class="btn">Donate Crypto</a>
+    </div>
+
+    <!-- Contact -->
+    <div class="card contact">
+      <div class="title"><i class="fas fa-address-book"></i> Contact Us</div>
+      <p><i class="fas fa-envelope"></i> Email: <b>satyamrajsingh562@gmail.com</b></p>
+      <p><i class="fas fa-phone"></i> Phone: <b>+91 9679145745</b></p>
+    </div>
+
+    <!-- Spin Wheel -->
+    <div class="card projects">
+      <div class="title"><i class="fas fa-dice"></i> Slots</div>
+      <p>Test your luck</p>
+      <a href="spin.html" class="btn">Win ₹20</a>
+    </div>
+
+  </div>
+</body>
+</html>

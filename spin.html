@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Slot Winner</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --card-bg:#fff;
+  --accent1:#16a085;
+  --accent2:#1abc9c;
+  --accent3:#f39c12;
+  --muted:#444;
+  --glass:rgba(255,255,255,0.06);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:linear-gradient(120deg,#fdfbfb,#ebedee);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:20px;
+  color:#111;
+}
+h1{font-size:28px;margin:12px 0 8px 0;}
+.card{
+  width:100%;
+  max-width:540px;
+  background:var(--card-bg);
+  border-radius:18px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.12);
+  padding:28px;
+  text-align:center;
+}
+.slots{
+  display:flex;
+  gap:18px;
+  justify-content:center;
+  margin:20px 0 10px 0;
+}
+.slot{
+  width:120px;
+  height:120px;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2),var(--accent3));
+  background-size:200% 200%;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:36px;
+  font-weight:700;
+  letter-spacing:1px;
+  box-shadow: inset 0 6px 18px rgba(0,0,0,0.25), 0 6px 16px rgba(0,0,0,0.06);
+  transition:transform .18s ease;
+  user-select:none;
+}
+.slot.spin{transform:translateY(-6px) scale(1.02);}
+.controls{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  align-items:center;
+  margin-top:10px;
+  flex-wrap:wrap;
+}
+.btn{
+  padding:12px 26px;
+  border-radius:12px;
+  border:0;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  color:#fff;
+  font-weight:700;
+  font-size:15px;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(22,160,133,0.18);
+  transition:transform .14s ease, box-shadow .14s ease, opacity .14s;
+}
+.btn:disabled{opacity:.46;cursor:not-allowed;box-shadow:none}
+.btn:active{transform:translateY(2px)}
+#result{margin-top:18px;min-height:42px;font-size:17px;font-weight:700;color:#111;}
+#chances{margin-top:8px;color:var(--muted);font-size:13px;}
+.items-card{
+  margin-top:18px;
+  text-align:left;
+  padding:18px;
+  border-radius:12px;
+  background:linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.02));
+  color:#222;
+  font-size:14px;
+  line-height:1.45;
+}
+.items-card h3{margin:0 0 8px 0;font-size:16px}
+.items-card ul{padding-left:18px;margin:6px 0}
+.items-card li{margin:6px 0}
+.contact-btn{
+  display:inline-block;
+  margin-top:12px;
+  padding:10px 18px;
+  border-radius:10px;
+  background:linear-gradient(90deg,#f39c12,#d35400);
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+}
+.admin-reset{
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius:6px;
+  background: #fff;
+  opacity: 0.03;
+  border: 1px solid rgba(0,0,0,0.02);
+  z-index: 9999;
+  cursor: pointer;
+  transition: opacity .12s ease, transform .12s ease;
+}
+.admin-reset:hover{opacity:0.18;transform:scale(1.05);}
+@media(max-width:520px){.slot{width:92px;height:92px;font-size:28px}.slots{gap:12px}.card{padding:20px}}
+</style>
+</head>
+<body>
+<h1><i class="fas fa-dice"></i> slot winner</h1>
+
+<div class="card" aria-live="polite">
+  <div class="slots" aria-hidden="false">
+    <div class="slot" id="slot1">?</div>
+    <div class="slot" id="slot2">?</div>
+    <div class="slot" id="slot3">?</div>
+  </div>
+  <div class="controls">
+    <button id="spinBtn" class="btn" aria-controls="result">spin</button>
+  </div>
+  <div id="result" role="status"></div>
+  <div id="chances" aria-live="polite"></div>
+</div>
+
+<div class="card items-card" aria-hidden="false">
+<h3> Items</h3>
+<ul>
+<li>  Hacking E-book</li>
+<li> Better luck next time</li>
+<li> 20₹ redeem code /upi (rare)</li>
+<li> Free OTT subscription</li>
+<li> Wifi tool</li>
+</ul>
+<p><strong>Rules:</strong> 0nly <b>3 chances per week</b>. wins must be redeemed via contact - +919679145745 | Must take screenshot of the reward</p>
+</div>
+
+<div class="admin-reset" id="adminReset" title="tester reset (hidden)"></div>
+
+<script>
+const slotEls = [document.getElementById('slot1'),document.getElementById('slot2'),document.getElementById('slot3')];
+const spinBtn = document.getElementById('spinBtn');
+const resultEl = document.getElementById('result');
+const chancesEl = document.getElementById('chances');
+const STORAGE_KEY = 'slotWinner_v2';
+
+function getWeekNumber(date=new Date()){
+  const d=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate()));
+  const dayNum=d.getUTCDay()||7;
+  d.setUTCDate(d.getUTCDate()+4-dayNum);
+  const yearStart=new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  return Math.ceil((((d-yearStart)/86400000)+1)/7);
+}
+
+function loadState(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw) return resetState();
+    const parsed=JSON.parse(raw);
+    const currentWeek=getWeekNumber();
+    if(parsed.week!==currentWeek){parsed.week=currentWeek;parsed.used=0;localStorage.setItem(STORAGE_KEY,JSON.stringify(parsed))}
+    return parsed;
+  }catch(e){return resetState();}
+}
+
+function resetState(){
+  const state={week:getWeekNumber(),used:0};
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+  return state;
+}
+
+let state=loadState();
+
+function updateUI(){
+  const left=Math.max(0,3-(state.used||0));
+  chancesEl.textContent='spins left this week: '+left;
+  spinBtn.disabled=left<=0;
+}
+updateUI();
+
+function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+
+function pickRewardWeighted(){
+  // weights (total 100): e-book 25, luck 25, redeem 2, OTT 24, wifi 24
+  const weights=[25,25,2,24,24];
+  const rewards=[
+    {id:'ebook',text:' E-book Worth 49₹'},
+    {id:'no',text:'Better luck next time'},
+    {id:'redeem',text:' 20₹ Redeem! contact to claim Terms applicable'},
+    {id:'ott',text:'Free OTT subscription Any'},
+    {id:'wifi',text:' Wifi tool'}
+  ];
+  const total=weights.reduce((a,b)=>a+b,0);
+  const rnd=Math.random()*total;
+  let sum=0;
+  for(let i=0;i<weights.length;i++){
+    sum+=weights[i];
+    if(rnd<sum) return rewards[i];
+  }
+  return rewards[1]; // fallback
+}
+
+function animateSpin(finalNumbers,duration=900){
+  const start=Date.now();
+  const interval=80;
+  const anim=setInterval(()=>{
+    slotEls.forEach(s=>s.textContent=String(rand(1,40)));
+    if(Date.now()-start>duration){
+      clearInterval(anim);
+      slotEls.forEach((el,i)=>el.textContent=String(finalNumbers[i]));
+      slotEls.forEach(el=>{el.classList.add('spin');setTimeout(()=>el.classList.remove('spin'),380);});
+    }
+  },interval);
+}
+
+spinBtn.addEventListener('click',()=>{
+  state=loadState();
+  if(state.used>=3){updateUI();resultEl.textContent='❌ no more chances this week';return;}
+  state.used=(state.used||0)+1;
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+  updateUI();
+  const nums=[rand(1,40),rand(1,40),rand(1,40)];
+  animateSpin(nums);
+  setTimeout(()=>{
+    const reward=pickRewardWeighted();
+    if(reward.id==='redeem'||reward.id==='ebook'||reward.id==='wifi'||reward.id==='ott'){
+      resultEl.innerHTML=`${reward.text} <br><a class="contact-btn" href="tel:+919679145745">contact</a>`;
+    }else{resultEl.textContent=reward.text;}
+  },1100);
+});
+
+const adminEl=document.getElementById('adminReset');
+adminEl.addEventListener('click',(e)=>{
+  const pass=prompt('admin password:');
+  if(pass===null) return;
+  if(pass==='LL'){
+    const newState={week:getWeekNumber(),used:0};
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(newState));
+    state=newState;
+    updateUI();
+    resultEl.textContent=' Tester Reset applied';
+    setTimeout(()=>{if(resultEl.textContent==='✅ tester reset applied') resultEl.textContent='';},2200);
+  }else{
+    resultEl.textContent='Hat Chuttiye';
+    setTimeout(()=>{if(resultEl.textContent==='❌ invalid') resultEl.textContent='';},1200);
+  }
+});
+</script>
+</body>
+</html>
