@@ -6,32 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Satyam Portfolio</title>
 
-  <!-- Open Graph / SEO Image -->
-  <meta property="og:title" content="Satyam Raj - Portfolio" />
-  <meta property="og:description" content="Cyber Security Beginner | Developer | Learner" />
-  <meta property="og:image" content="satyam.png" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://satyam-raj-india.github.io/Satyam-Raj/" />
+  <!-- ✅ Open Graph for Google / Facebook / LinkedIn -->
+  <meta property="og:title" content="Satyam Raj Portfolio">
+  <meta property="og:description" content="Cyber Security & Web Development Portfolio of Satyam Raj.">
+  <meta property="og:image" content="https://satyam-raj-india.github.io/Satyam-Raj/satyam.png">
+  <meta property="og:url" content="https://satyam-raj-india.github.io/Satyam-Raj/">
+  <meta property="og:type" content="website">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Satyam Raj - Portfolio" />
-  <meta name="twitter:description" content="Cyber Security Beginner | Developer | Learner" />
-  <meta name="twitter:image" content="satyam.png" />
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Satyam Raj",
-    "url": "https://satyam-raj-india.github.io/Satyam-Raj/",
-    "image": "satyam.png",
-    "email": "mailto:satyamrajsingh562@gmail.com",
-    "telephone": "+91-9679145745",
-    "jobTitle": "Cyber Security Beginner | Developer"
-  }
-  </script>
+  <!-- ✅ Twitter Card Preview -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Satyam Raj Portfolio">
+  <meta name="twitter:description" content="Cyber Security & Web Development Portfolio of Satyam Raj.">
+  <meta name="twitter:image" content="https://satyam-raj-india.github.io/Satyam-Raj/satyam.png">
 
   <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -121,12 +107,10 @@
       background: #3033cc;
     }
 
-    .profile-pic {
-      max-width: 150px;
-      border-radius: 50%;
-      display: block;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    .social a {
+      text-decoration: none;
+      margin-right: 15px;
+      font-size: 16px;
     }
 
     .crypto-icons i {
@@ -143,7 +127,7 @@
 
     .donate a {
       text-decoration: none;
-      color: #222;
+      color: #222; /* normal text color */
       font-weight: bold;
     }
 
@@ -152,62 +136,3 @@
     }
   </style>
 </head>
-<body>
-  <div class="container">
-
-    <!-- About -->
-    <div class="card about">
-      <div class="title"><i class="fas fa-user"></i> About Me</div>
-      <img src="satyam.png" alt="Satyam Raj - Profile Picture" class="profile-pic">
-      <div class="subtitle">Cyber Security Beginner | Developer | Learner</div>
-      <p>Hello! I’m <b>Satyam Raj</b>. I'm a Cyber Security and Web Development Beginner. I like to create anything related to code and scripts. I'm not a professional or an expert — I'm just a beginner. If you find any mistakes, keep them with you. They aren't mistakes, that's my style ;)</p>
-      <a href="resume.pdf" class="btn" download><i class="fas fa-download"></i> Download Resume</a>
-    </div>
-
-    <!-- Skills -->
-    <div class="card skills">
-      <div class="title"><i class="fas fa-tools"></i> Skills</div>
-      <p>Cyber Security · Penetration Testing · Python · HTML/CSS/JS · Web Development · Photo & Video Editing · App/Game Modding</p>
-    </div>
-
-    <!-- Projects -->
-    <div class="card projects">
-      <div class="title"><i class="fas fa-folder-open"></i> My Projects</div>
-      <!-- project details (unchanged) -->
-      <a href="projects.html" class="btn">View All Projects</a>
-    </div>
-
-    <!-- Donate -->
-    <div class="card donate">
-      <div class="title"><i class="fas fa-heart"></i> Donate</div>
-      <p class="donate-msg">Your support keeps my projects alive ❤️ Every contribution motivates me to build more!</p>
-      <p><i class="fas fa-university"></i> 
-        <a href="upi://pay?pa=9679145745@fam&pn=0000&tid=123456&am=100&cu=INR" target="_blank">9679145745@fam</a>
-      </p>
-      <p><i class="fab fa-paypal"></i> 
-        <a href="https://www.paypal.me/SatyamSingh420" target="_blank">paypal.me/SatyamSingh420</a>
-      </p>
-    </div>
-
-    <!-- Crypto -->
-    <div class="card crypto">
-      <div class="title"><i class="fab fa-bitcoin"></i> We Accept Cryptos</div>
-      <div class="crypto-icons">
-        <i class="fab fa-bitcoin"></i>
-        <i class="fab fa-ethereum"></i>
-        <i class="fab fa-monero"></i>
-        <i class="fab fa-litecoin"></i>
-      </div>
-      <a href="crypto.html" class="btn">Donate Crypto</a>
-    </div>
-
-    <!-- Contact -->
-    <div class="card contact">
-      <div class="title"><i class="fas fa-address-book"></i> Contact Us</div>
-      <p><i class="fas fa-envelope"></i> Email: <b>satyamrajsingh562@gmail.com</b></p>
-      <p><i class="fas fa-phone"></i> Phone: <b>+91 9679145745</b></p>
-    </div>
-
-  </div>
-</body>
-</html>
